@@ -21,26 +21,14 @@ data class SurveyOption(
     @field:Text(required = false)
     var label: String = ""
 )
-
-/**
- * Maps to:
- * <options multiple="yes">
- *   <option value="REACT">React JS</option>
- *   ...
- * </options>
- *
- * "multiple" tells us whether to render radio buttons (single choice) or
- * checkboxes (multiple choice) — the API doc uses one "choice" question type
- * for both and distinguishes them via this attribute.
- */
 @Root(name = "options", strict = false)
 data class OptionsWrapper(
 
     @field:Attribute(name = "multiple", required = false)
-    var multiple: String = "no",
+    var multiple: Int = 1,
 
     @field:ElementList(entry = "option", inline = true, required = false)
     var options: MutableList<SurveyOption> = mutableListOf()
 ) {
-    val isMultiSelect: Boolean get() = multiple.equals("yes", ignoreCase = true)
+    val isMultiSelect: Boolean get() = multiple == 1
 }

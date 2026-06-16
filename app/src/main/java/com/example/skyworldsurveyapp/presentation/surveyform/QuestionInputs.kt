@@ -21,11 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.skyworld.surveyapp.data.model.Question
 import com.skyworld.surveyapp.data.model.QuestionType
 
-/**
- * Single entry point the form screen calls — this is the "dynamic rendering"
- * piece: it doesn't know in advance what questions exist, it just switches
- * on whatever "type" the API sent back.
- */
+
 @Composable
 fun QuestionInput(
     question: Question,
@@ -40,13 +36,17 @@ fun QuestionInput(
         QuestionType.SHORT_TEXT -> ShortTextInput(currentAnswer, onAnswerChange)
         QuestionType.LONG_TEXT -> LongTextInput(currentAnswer, onAnswerChange)
         QuestionType.EMAIL -> EmailInput(currentAnswer, onAnswerChange)
-        QuestionType.CHOICE -> {
+        //QuestionType.SINGLE_CHOICE ->   MultipleChoiceInput(question.options, currentAnswer, onMultiChoiceToggle)
+
+
+        QuestionType.SINGLE_CHOICE -> {
             val opts = question.options
-            if (opts?.isMultiSelect == true) {
-                MultipleChoiceInput(opts.options, currentAnswer, onMultiChoiceToggle)
-            } else {
-                SingleChoiceInput(opts?.options.orEmpty(), currentAnswer, onAnswerChange)
-            }
+            SingleChoiceInput(opts?.options.orEmpty(), currentAnswer, onAnswerChange)
+
+        }
+        QuestionType.MULTIPLE_CHOICE ->{
+            val opt = question.options
+            MultipleChoiceInput(opt?.options.orEmpty(), currentAnswer, onMultiChoiceToggle)
         }
         QuestionType.FILE -> FileUploadInput(
             allowsMultiple = question.fileProperties?.allowsMultiple ?: false,

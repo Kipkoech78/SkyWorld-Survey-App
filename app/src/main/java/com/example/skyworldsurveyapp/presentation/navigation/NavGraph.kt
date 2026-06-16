@@ -7,8 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.skyworld.surveyapp.presentation.surveyform.SurveyFormScreen
-import com.skyworld.surveyapp.presentation.surveylist.SurveyListScreen
+import com.example.skyworldsurveyapp.presentation.surveyform.SurveyFormScreen
+import com.example.skyworldsurveyapp.presentation.surveylist.SurveyListScreen
 
 @Composable
 fun SurveyNavGraph(navController: NavHostController = rememberNavController()) {

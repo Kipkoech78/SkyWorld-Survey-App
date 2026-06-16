@@ -10,14 +10,13 @@ object QuestionType {
     const val SHORT_TEXT = "short_text"
     const val LONG_TEXT = "long_text"
     const val EMAIL = "email"
-    const val CHOICE = "choice"
+    const val SINGLE_CHOICE= "single_choice"
+    const val MULTIPLE_CHOICE = "multiple_choice"
+   // const val CHOICE = "choice"
     const val FILE = "file"
 }
 
-/**
- * Maps to:
- * <file_properties format=".pdf" max_file_size="1" max_file_size_unit="mb" multiple="yes" />
- */
+//pdf format
 @Root(name = "file_properties", strict = false)
 data class FileProperties(
 
@@ -36,10 +35,6 @@ data class FileProperties(
     val allowsMultiple: Boolean get() = multiple.equals("yes", ignoreCase = true)
 }
 
-/**
- * Maps to a single <question> element as returned by
- * GET /api/surveys/{surveyId}/questions
- */
 @Root(name = "question", strict = false)
 data class Question(
 
@@ -70,7 +65,6 @@ data class Question(
     val isRequired: Boolean get() = required.equals("yes", ignoreCase = true)
 }
 
-/** Maps to the wrapping <questions>...</questions> element. */
 @Root(name = "questions", strict = false)
 data class QuestionListResponse(
 

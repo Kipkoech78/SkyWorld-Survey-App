@@ -12,10 +12,7 @@ import retrofit2.http.Part
 import retrofit2.http.PartMap
 import retrofit2.http.Path
 
-/**
- * Only covers the mobile-relevant endpoints (survey discovery + completion).
- * Survey/question/response management is web-only per the spec.
- */
+
 interface SurveyApiService {
 
     @GET("surveys")
@@ -24,14 +21,6 @@ interface SurveyApiService {
     @GET("surveys/{surveyId}/questions")
     suspend fun getSurveyQuestions(@Path("surveyId") surveyId: Long): QuestionListResponse
 
-    /**
-     * Submission is multipart/form-data (not raw XML) so the API can accept
-     * file parts alongside the answer fields. Each non-file answer is sent
-     * as a text field keyed by the question's "name" (e.g. "full_name"),
-     * multi-select choice answers are comma-joined values (matches the doc's
-     * "REACT,VUE" example), and every uploaded file is a part named
-     * "certificates".
-     */
     @Multipart
     @POST("surveys/{surveyId}/responses")
     suspend fun submitSurveyResponse(

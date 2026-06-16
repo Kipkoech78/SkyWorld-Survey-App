@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Your API runs over plain HTTP on localhost. Android blocks cleartext (non-HTTPS)
-  traffic by default from API 28 onward, so we explicitly allow it for the
-  addresses your dev API can be reached at:
-
-    10.0.2.2   -> how the Android EMULATOR sees your machine's "localhost"
-    localhost  -> only relevant if you ever run this against a device-local server
-
-  If you're testing on a PHYSICAL device on the same Wi-Fi as your computer,
-  replace 10.0.2.2 below with your machine's LAN IP (e.g. 192.168.1.42) and
-  update BASE_URL in NetworkModule.kt to match.
--->
+<!-- converting  api from localhost to non string ip address-->
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="false">10.0.2.2</domain>

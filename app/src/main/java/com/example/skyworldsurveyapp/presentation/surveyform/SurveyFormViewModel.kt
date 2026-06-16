@@ -24,8 +24,7 @@ data class SurveyFormUiState(
     val loadError: String? = null,
     val questions: List<Question> = emptyList(),
     val currentStep: Int = 0,
-    // questionName -> answer. For multi-select choice questions this is a
-    // comma-joined string of selected option values, matching the API doc.
+
     val answers: Map<String, String> = emptyMap(),
     val certificateUris: Map<String, List<Uri>> = emptyMap(),
     val fileTooLargeError: String? = null,
@@ -125,7 +124,7 @@ class SurveyFormViewModel @Inject constructor(
         _uiState.update { it.copy(currentStep = (it.currentStep - 1).coerceAtLeast(0), validationError = null) }
     }
 
-    /** Jump back to a specific step from the review screen to edit an answer. */
+    // Jump back to a specific step from the review screen to edit an answer.
     fun editStep(stepIndex: Int) {
         _uiState.update { it.copy(currentStep = stepIndex.coerceIn(0, it.questions.size), validationError = null) }
     }

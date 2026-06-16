@@ -1,8 +1,8 @@
-package com.skyworld.surveyapp.presentation.surveyform
+package com.example.skyworldsurveyapp.presentation.surveyform
 
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skyworld.surveyapp.data.model.Question
 import com.skyworld.surveyapp.data.model.QuestionType
+import com.skyworld.surveyapp.presentation.surveyform.QuestionInput
+import com.skyworld.surveyapp.presentation.surveyform.SurveyFormViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -109,13 +111,13 @@ fun SurveyFormScreen(
 private fun QuestionStepContent(
     question: Question,
     answer: String,
-    certificateUris: List<android.net.Uri>,
+    certificateUris: List<Uri>,
     validationError: String?,
     fileError: String?,
     onAnswerChange: (String) -> Unit,
     onMultiChoiceToggle: (String, Boolean) -> Unit,
-    onAddCertificate: (android.net.Uri) -> Unit,
-    onRemoveCertificate: (android.net.Uri) -> Unit
+    onAddCertificate: (Uri) -> Unit,
+    onRemoveCertificate: (Uri) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         Text(question.text, style = MaterialTheme.typography.headlineSmall)
@@ -150,7 +152,7 @@ private fun QuestionStepContent(
 private fun ReviewContent(
     questions: List<Question>,
     answers: Map<String, String>,
-    certificateUris: Map<String, List<android.net.Uri>>,
+    certificateUris: Map<String, List<Uri>>,
     onEditStep: (Int) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -178,8 +180,7 @@ private fun ReviewContent(
         }
     }
 }
-
-/** Turns stored option codes (e.g. "REACT,VUE") back into readable labels for the review screen. */
+//convert options to readable layers
 private fun answersDisplayLabel(question: Question, rawValue: String?): String {
     if (rawValue.isNullOrBlank()) return "—"
     val options = question.options?.options ?: return rawValue

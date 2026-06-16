@@ -19,10 +19,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    // 10.0.2.2 is how the Android EMULATOR reaches your machine's localhost.
-    // Running on a physical device? Swap this for your machine's LAN IP
-    // (e.g. "http://192.168.1.42:3000/api/") and make sure both devices are
-    // on the same network, and add that IP to network_security_config.xml.
+
     private const val BASE_URL = "http://10.0.2.2:3000/api/"
 
     @Provides

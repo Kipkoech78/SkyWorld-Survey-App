@@ -36,7 +36,6 @@ class SurveyRepositoryImpl @Inject constructor(
         }
     }
 
-    /** Centralizes try/catch so every call site returns a consistent Resource. */
     private suspend inline fun <T> safeCall(block: suspend () -> T): Resource<T> {
         return try {
             Resource.Success(block())
